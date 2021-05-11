@@ -42,3 +42,11 @@ library(dcmodifydt)
 ```{r, code = readLines("example/modify.R")}
 ```
 
+
+```{r, code = readLines("example/dump_dt.R"), eval = FALSE}
+```
+
+```r
+```{r, code = readLines("example/dump_dt.R"), echo = FALSE, results="asis"}
+```
+```

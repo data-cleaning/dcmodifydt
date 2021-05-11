@@ -4,6 +4,7 @@
 #' @param x `dcmodify::modifier()` object with the modification rules
 #' @param name `character` name of data.table to be used.
 #' @param file where should the generated file be written?
+#' @example example/dump_dt.R
 #' @export
 dump_dt <- function(x, name = "dat", file = stdout()){
   header <- paste0("# ", c(
