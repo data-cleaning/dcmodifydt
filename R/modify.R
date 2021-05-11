@@ -49,7 +49,7 @@ modify.data.table <- function(dat, x, copy, sequential, ...){
 
 #' modifies data.table in place
 #'
-#' modifies data.table in place, alias for [modify()] with `copy=TRUE` and
+#' modifies data.table in place, alias for `modify` with `copy=TRUE` and
 #' `sequential=TRUE`
 #' @param dat [data.table()] object
 #' @param x `dcmodify::modifier` object.

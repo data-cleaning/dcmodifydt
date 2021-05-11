@@ -1,5 +1,5 @@
 Package: dcmodifydt
-Title: Modification Rules on data.table
+Title: Modification Rules on 'data.table'
 Version: 0.1.0.9000
 Authors@R: 
     person(given = "Edwin",
