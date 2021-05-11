@@ -24,4 +24,5 @@ Imports:
 Suggests: 
     covr,
     tinytest
-URL: https://data-cleaning.github.io/dcmodifydt
+URL: https://github.com/data-cleaning/dcmodifydt
+BugReports: https://github.com/data-cleaning/dcmodifydt/issues
