@@ -34,3 +34,11 @@ devtools::install_github("data-cleaning/dcmodifydt")
 ```
 ## Example
 
+```{r}
+library(dcmodifydt)
+```
+
+
+```{r, code = readLines("example/modify.R")}
+```
+

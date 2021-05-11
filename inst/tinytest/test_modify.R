@@ -43,7 +43,7 @@ expect_equal(d, d2)
 
 # refresh
 d <- fread(text=
-             "age, income
+"age, income
   10,   2000
   -1,      1
   150,  3000"

@@ -17,7 +17,8 @@ RoxygenNote: 7.1.1
 Remotes:
   data-cleaning/dcmodify/pkg
 Depends:
-    dcmodify (>= 0.1.9)
+    dcmodify (>= 0.1.9),
+    R (>= 3.5.0)
 Imports: 
     data.table,
     methods

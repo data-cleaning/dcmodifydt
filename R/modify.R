@@ -56,6 +56,6 @@ modify.data.table <- function(dat, x, copy, sequential, ...){
 #' @param ... not used
 #' @export
 setmodify <- function(dat, x, ...){
-  modify.data.table(dat = dat, x = x, copy = FALSE, sequential = TRUE)
+  modify.data.table(dat = dat, x = x, copy = FALSE, sequential = TRUE, ...)
   invisible(dat)
 }
