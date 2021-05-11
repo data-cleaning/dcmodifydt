@@ -14,6 +14,8 @@ Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
+Remotes:
+  data-cleaning/dcmodify/pkg
 Depends:
     dcmodify (>= 0.1.9)
 Imports: 
