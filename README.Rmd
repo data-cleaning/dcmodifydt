@@ -18,6 +18,7 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 [![CRAN status](https://www.r-pkg.org/badges/version/dcmodifydt)](https://CRAN.R-project.org/package=dcmodifydt)
   [![R-CMD-check](https://github.com/data-cleaning/dcmodifydt/workflows/R-CMD-check/badge.svg)](https://github.com/data-cleaning/dcmodifydt/actions)
+[![Codecov test coverage](https://codecov.io/gh/data-cleaning/dcmodifydt/branch/main/graph/badge.svg)](https://codecov.io/gh/data-cleaning/dcmodifydt?branch=main)
 <!-- badges: end -->
 
 `dcmodifydt` executes modification rules on a data.table.

@@ -21,4 +21,7 @@ Depends:
 Imports: 
     data.table,
     methods
-Suggests: tinytest
+Suggests: 
+    covr,
+    tinytest
+URL: https://data-cleaning.github.io/dcmodifydt
