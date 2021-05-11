@@ -6,14 +6,17 @@ Authors@R:
            family = "de Jonge",
            role = c("aut", "cre"),
            email = "edwindjonge@gmail.com",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: dcmodify on data.table
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
+           comment = c(ORCID = "0000-0002-6580-4718"))
+Description: Apply 'dcmodify' rules on a 'data.table', code generated is optimized 
+  for changing a data.table in place / by reference.
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
+Depends:
+    dcmodify (>= 0.1.9)
 Imports: 
     data.table,
-    dcmodify (>= 0.1.9)
+    methods
+Suggests: tinytest
