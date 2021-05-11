@@ -14,6 +14,6 @@ setmodify(dat, x, ...)
 \item{...}{not used}
 }
 \description{
-modifies data.table in place, alias for \code{\link[=modify]{modify()}} with \code{copy=TRUE} and
+modifies data.table in place, alias for \code{modify} with \code{copy=TRUE} and
 \code{sequential=TRUE}
 }
