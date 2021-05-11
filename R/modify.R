@@ -6,7 +6,7 @@
 #' This is a more efficient implementation then coercing the data.table to a
 #' data.frame and use that implementation.
 #' @param dat [data.table()] object
-#' @param x `dcmodify::modifier()` object.
+#' @param x `dcmodify::modifier` object.
 #' @param copy if `TRUE` modify copy of table.
 #' @param sequential if `TRUE` (default), steps will be executed in sequence, so order matters.
 #' @param ... unused
@@ -52,9 +52,10 @@ modify.data.table <- function(dat, x, copy, sequential, ...){
 #' modifies data.table in place, alias for [modify()] with `copy=TRUE` and
 #' `sequential=TRUE`
 #' @param dat [data.table()] object
-#' @param x `dcmodify::modifier()` object.
+#' @param x `dcmodify::modifier` object.
 #' @param ... not used
 #' @export
 setmodify <- function(dat, x, ...){
   modify.data.table(dat = dat, x = x, copy = FALSE, sequential = TRUE)
+  invisible(dat)
 }

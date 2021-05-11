@@ -1,7 +1,7 @@
 #' Dump data.table modification script
 #'
 #' Dump data.table modification script
-#' @param x [dcmodify::modifier()] object with the modification rules
+#' @param x `dcmodify::modifier()` object with the modification rules
 #' @param name `character` name of data.table to be used.
 #' @param file where should the generated file be written?
 #' @export
