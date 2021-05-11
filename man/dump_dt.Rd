@@ -7,7 +7,7 @@
 dump_dt(x, name = "dat", file = stdout())
 }
 \arguments{
-\item{x}{\code{\link[dcmodify:modifier]{dcmodify::modifier()}} object with the modification rules}
+\item{x}{\code{dcmodify::modifier()} object with the modification rules}
 
 \item{name}{\code{character} name of data.table to be used.}
 

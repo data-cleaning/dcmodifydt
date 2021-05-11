@@ -1,6 +1,6 @@
 Package: dcmodifydt
-Title: What the Package Does (One Line, Title Case)
-Version: 0.0.0.9000
+Title: Modification Rules on data.table
+Version: 0.1.0.9000
 Authors@R: 
     person(given = "Edwin",
            family = "de Jonge",

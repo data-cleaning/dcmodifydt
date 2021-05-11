@@ -9,7 +9,7 @@
 \arguments{
 \item{dat}{\code{\link[=data.table]{data.table()}} object}
 
-\item{x}{\code{dcmodify::modifier()} object.}
+\item{x}{\code{dcmodify::modifier} object.}
 
 \item{copy}{if \code{TRUE} modify copy of table.}
 
