@@ -17,6 +17,10 @@ coverage](https://codecov.io/gh/data-cleaning/dcmodifydt/branch/main/graph/badge
 rules on a data.table, making it easy to switch between data.frame ,
 database or data.table implementation.
 
+`dcmodify` separates **intent** from **execution**: a user specifies
+*what*, *why* and *how* of an automatic data change and uses dcmodify to
+execute them on a `data.table`.
+
 ### Rationale
 
 `data.table` is an excellent package with great performance. Why not

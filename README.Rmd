@@ -24,6 +24,8 @@ knitr::opts_chunk$set(
 `dcmodifydt` executes [`dcmodify`](https://CRAN.R-project.org/package=dcmodify) modification rules on a data.table, making it easy to switch between data.frame
 , database or data.table implementation.
 
+`dcmodify` separates **intent** from **execution**: a user specifies _what_, _why_ and _how_ of an automatic data change and uses dcmodify to  execute them on a `data.table`.
+
 ### Rationale
 
 `data.table` is an excellent package with great performance. Why not code
