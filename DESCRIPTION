@@ -20,6 +20,7 @@ Depends:
     dcmodify (>= 0.1.9),
     R (>= 3.5.0)
 Imports: 
+    validate,
     data.table,
     methods
 Suggests: 

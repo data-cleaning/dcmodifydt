@@ -22,7 +22,7 @@ dump_dt <- function(x, name = "dat", file = stdout()){
     dt_assign_char(dt_assign(a))
   })
 
-  comments <- paste0("\n  # ", names(x), ": ", label(x), "\n  ")
+  comments <- paste0("\n  # ", names(x), ": ", validate::label(x), "\n  ")
 
   names(comments) <- names(x)
 
