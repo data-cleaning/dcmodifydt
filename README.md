@@ -12,7 +12,29 @@ status](https://www.r-pkg.org/badges/version/dcmodifydt)](https://CRAN.R-project
 coverage](https://codecov.io/gh/data-cleaning/dcmodifydt/branch/main/graph/badge.svg)](https://codecov.io/gh/data-cleaning/dcmodifydt?branch=main)
 <!-- badges: end -->
 
-`dcmodifydt` executes modification rules on a data.table.
+`dcmodifydt` executes
+[`dcmodify`](https://CRAN.R-project.org/package=dcmodify) modification
+rules on a data.table, making it easy to switch between data.frame ,
+database or data.table implementation.
+
+### Rationale
+
+`data.table` is an excellent package with great performance. Why not
+code modification rules directly in R script? *Keep it simple* is
+certainly a good advise, reasons to use `dcmodify` are:
+
+-   You have a set “correction” rules in a production process that you
+    apply repeatly, e.g. in each production run.
+
+-   You want to share these rules with different production processes.
+
+-   You have data matter specialists that do not know (or have to)
+    program in R, and use this as a quality frame work to communicate
+    and specify the step to correct or derive variables.
+
+In these cases it is useful to label, describe and document your rules,
+and use `dcmodify`, `dcmodifydt` or `dcmodifydb` to apply the
+modification rules.
 
 ## Installation
 
@@ -61,14 +83,66 @@ print(dat)
 #> 3:  25   3000
 ```
 
+### Documented modification rules:
+
+Create a modifier object:
+
 ``` r
-library(dcmodify)
+m <- modifier(.file = "example/example.yml")
+```
 
-m <- modifier( if (age > 130) age = 130
-               , income[age < 12] <- 0
-)
+From this specification file “example/example.yml”:
 
-dump_dt(m, "my_data")
+``` yml
+rules:
+- expr: if (age > 130) age = 130L
+  name: M1
+  label: 'Maximum age'
+  description: |
+    Human age is limited. (can use  "=")
+    Cap the age at 130
+- expr: is.na(age) <- age < 0
+  name: M2
+  label: 'Unknown age'
+  description: |
+    Negative Age, nah...
+    (set to NA)
+- expr: income[age < 12] <- 0
+  name: M3
+  label: 'No Child Labor'
+  description: |
+    Children should not work. (R syntax)
+    Set income to zero for children.
+- expr: retired <- (age > 67)
+  name: M4
+  label: 'Retired'
+  description: |
+    Derive a new variable...
+```
+
+``` r
+dat <- data.table::fread(text = 
+"age, income
+  11,   2000
+ 150,    300
+  25,   2000
+ -10,   2000")
+
+modify(dat, m, copy=FALSE)
+print(dat)
+#>    age income retired
+#> 1:  11      0   FALSE
+#> 2: 130    300    TRUE
+#> 3:  25   2000   FALSE
+#> 4:  NA   2000      NA
+```
+
+For convenience it is possible to dump the data.table statements. This
+file can be sourced, resulting in the modifications of the supplied
+table (name)
+
+``` r
+dump_dt(m, name = "my_dt", file="change_my_dt.R")
 ```
 
 ``` r
@@ -77,11 +151,20 @@ dump_dt(m, "my_data")
 # dcmodify version: 0.1.9
 # dcmodifydt version: 0.1.0.9000
 # ####################################
-# ensure that sourcing the file only affects 'my_data'
+# ensure that sourcing the file only affects 'my_dt'
 local({
-  dat <- my_data
-
-  dat[age > 130, age := 130]
+  dat <- my_dt
+  
+  # M1: Maximum age
+  dat[age > 130, age := 130L]
+  
+  # M2: Unknown age
+  dat[age < 0, age := NA]
+  
+  # M3: No Child Labor
   dat[age < 12, income := 0]
+  
+  # M4: Retired
+  dat[, retired := (age > 67)]
 })
 ```

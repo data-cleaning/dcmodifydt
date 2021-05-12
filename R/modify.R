@@ -13,6 +13,7 @@
 #' @example ./example/modify.R
 #' @importFrom dcmodify modify
 #' @import data.table
+#' @family modify
 #' @export
 setMethod("modify", signature("data.table", "modifier")
          , function(dat, x, copy = NULL, sequential = TRUE, ...){
@@ -21,7 +22,10 @@ setMethod("modify", signature("data.table", "modifier")
 
 modify.data.table <- function(dat, x, copy, sequential, ...){
   if (is.null(copy)){
-    warning("`copy` not specified, setting to `TRUE`")
+    warning("`copy` not specified, setting to `TRUE`.\n"
+           ,"Specify `copy` to remove this warning."
+           , call. = FALSE
+           )
     copy <- TRUE
   }
 
@@ -30,10 +34,13 @@ modify.data.table <- function(dat, x, copy, sequential, ...){
   }
 
   if (!isTRUE(sequential)){
-    warning("Switching to data.frame method...")
-    data.table::setDF(dat)
-    dat <- dcmodify::modify(dat, x, copy = copy, sequential = sequential, ...)
-    data.table::setDT(dat)
+    warning("`sequential=FALSE` switches to data.frame method.\n"
+           , "Working on copy of data.table."
+           , call. = FALSE
+           )
+    dat <- data.table::setDF(dat)
+    dat <- dcmodify::modify(dat, x, sequential = sequential, ...)
+    dat <- data.table::setDT(dat)
     return(dat)
   }
 
@@ -41,7 +48,14 @@ modify.data.table <- function(dat, x, copy, sequential, ...){
 
   for (a in dt_assigns){
     # changes `dat` "in place"...
-    eval(a)
+    tryCatch({
+      eval(a)
+    }, error=function(e){
+      warning("'", dt_assign_char(a), "' failed and skipped: \n"
+             , 'error: "', e$message, '"'
+             , call. = FALSE
+             )
+    })
   }
 
   dat
@@ -50,11 +64,14 @@ modify.data.table <- function(dat, x, copy, sequential, ...){
 #' modifies data.table in place
 #'
 #' modifies data.table in place, alias for `modify` with `copy=TRUE` and
-#' `sequential=TRUE`
+#' `sequential=TRUE`. It follows the naming convention in `data.table` to
+#' prefix methods that change objects (byreference) with `set`.
 #' @param dat [data.table()] object
 #' @param x `dcmodify::modifier` object.
 #' @param ... not used
 #' @export
+#' @family modify
+#' @example ./example/modify.R
 setmodify <- function(dat, x, ...){
   modify.data.table(dat = dat, x = x, copy = FALSE, sequential = TRUE, ...)
   invisible(dat)

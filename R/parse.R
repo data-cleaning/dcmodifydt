@@ -18,11 +18,16 @@ dt_assign <- function(e){
   g <- guard(e)
   v <- e[[2]]
   if (is.call(v)){
-    if (!is_select(v)){
+    if (is_select(v)){
+      g <- Reduce(function(e1, e2){bquote(.(e1) & .(e2))}, c(g, v[[3]]))
+      e[[2]] <- v[[2]]
+    } else if (v[[1]] == "is.na") {
+      g <- Reduce(function(e1, e2){bquote(.(e1) & .(e2))}, c(g, e[[3]]))
+      e[[2]] <- v[[2]]
+      e[[3]] <- NA
+    } else if (!is.symbol(v)){
       stop("Invalid assignment: '", deparse(e), "'")
     }
-    g <- Reduce(function(e1, e2){bquote(.(e1) & .(e2))}, c(g, v[[3]]))
-    e[[2]] <- v[[2]]
   }
   e[[1]] <- as.symbol(":=")
 

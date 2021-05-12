@@ -21,10 +21,28 @@ knitr::opts_chunk$set(
 [![Codecov test coverage](https://codecov.io/gh/data-cleaning/dcmodifydt/branch/main/graph/badge.svg)](https://codecov.io/gh/data-cleaning/dcmodifydt?branch=main)
 <!-- badges: end -->
 
-`dcmodifydt` executes modification rules on a data.table.
+`dcmodifydt` executes [`dcmodify`](https://CRAN.R-project.org/package=dcmodify) modification rules on a data.table, making it easy to switch between data.frame
+, database or data.table implementation.
+
+### Rationale
+
+`data.table` is an excellent package with great performance. Why not code
+modification rules directly in R script? _Keep it simple_ is certainly 
+a good advise, reasons to use `dcmodify` are:
+
+- You have a set "correction" rules in a production process that you apply repeatly, e.g. in each production run.
+
+- You want to share these rules with different production processes. 
+
+- You have data matter specialists that do not know (or have to) program in R,
+and use this as a quality frame work to communicate and specify the step to 
+correct or derive variables.
+
+In these cases it is useful to label, describe and document your rules, and 
+use `dcmodify`, `dcmodifydt` or `dcmodifydb` to apply the modification rules.
+
 
 ## Installation
-
 
 The development version from [GitHub](https://github.com/) with:
 
@@ -42,11 +60,41 @@ library(dcmodifydt)
 ```{r, code = readLines("example/modify.R")}
 ```
 
+### Documented modification rules:
 
-```{r, code = readLines("example/dump_dt.R"), eval = FALSE}
+ Create a modifier object:
+```{r}
+m <- modifier(.file = "example/example.yml")
+```
+
+From this specification file "example/example.yml":
+
+```yml
+```{r, child="example/example.yml", results="asis"}
+```
+```
+
+```{r}
+dat <- data.table::fread(text = 
+"age, income
+  11,   2000
+ 150,    300
+  25,   2000
+ -10,   2000")
+
+modify(dat, m, copy=FALSE)
+print(dat)
+```
+
+For convenience it is possible to dump the data.table statements. This 
+file can be sourced, resulting in the modifications of the supplied table (name)
+
+```{r, eval = FALSE}
+dump_dt(m, name = "my_dt", file="change_my_dt.R")
 ```
 
 ```r
-```{r, code = readLines("example/dump_dt.R"), echo = FALSE, results="asis"}
+```{r, echo = FALSE, results="asis"}
+dump_dt(m, name = "my_dt")
 ```
 ```

@@ -15,12 +15,20 @@ dump_dt <- function(x, name = "dat", file = stdout()){
     "####################################"
   ))
 
-  line <- if (name != "dat") paste0("dat <- ", name, "\n")
+  line <- if (name != "dat") paste0("dat <- ", name)
 
   asgns <- sapply(x$assignments(), function(a){
     # text translation of a
     dt_assign_char(dt_assign(a))
   })
+
+  comments <- paste0("\n  # ", names(x), ": ", label(x), "\n  ")
+
+  names(comments) <- names(x)
+
+  comments <- comments[names(asgns)]
+  comments[is.na(comments)] <- ""
+  asgns <- paste0(comments, asgns)
 
   txt <- c( header
           , sprintf("# ensure that sourcing the file only affects '%s'", name)

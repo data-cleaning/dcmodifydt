@@ -47,3 +47,8 @@ print(dat_m)
 setmodify(dat, m)
 print(dat)
 }
+\seealso{
+Other modify: 
+\code{\link{setmodify}()}
+}
+\concept{modify}
